@@ -1,0 +1,1 @@
+console.log("Hello! everyone. I am test.js file.");
