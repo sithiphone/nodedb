@@ -47,3 +47,21 @@ exports.createTrainee = async (req, res) => {
         });
     }
 };
+
+// update trainee
+exports.updateTrainee = async (req, res) => {
+    const id  = req.params.id;
+    // print req.body to see what is being sent
+    //console.log(req.body);
+    const q = 'Update trainees set gender=?, first_name=?, last_name=?, score=? where id=?';
+    db.query(q, [req.body.gender, req.body.first_name, req.body.last_name, req.body.score, id] ,
+         (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                status: 'INTERNAL_SERVER_ERROR',
+                message: err.message
+            });
+        }
+        return res.status(200).json({ message: 'Trainee updated successfully' });
+    } );
+}

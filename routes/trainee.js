@@ -6,5 +6,7 @@ var traineeController = require('../controllers/traineeController');
 router.get('/', traineeController.getAllTrainees);
 //router for create trainee
 router.post('/', traineeController.createTrainee);
+//router for update trainee
+router.put('/:id', traineeController.updateTrainee);
 
 module.exports = router;
