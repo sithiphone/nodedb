@@ -12,7 +12,7 @@ exports.saveImage = async (baseImage) => {
     if(ex === 'svg+xml'){
         fileName = Date.now() + '.svg';
     }else{
-        fileName = `${Date.now()} . ${ex}`;
+        fileName = `${Date.now()}.${ex}`;
     }
     
     let image = decodeBase64Image(baseImage);
