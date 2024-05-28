@@ -1,5 +1,6 @@
 var db = require('../db');
 var Trainee = require('../models/trainee');
+var saveImage = require('../controllers/uploadImangeController');
 
 // Get all trainees
 exports.getAllTrainees = (req, res) => {
@@ -20,6 +21,7 @@ exports.getAllTrainees = (req, res) => {
 exports.createTrainee = async (req, res) => {
     const { gender, first_name, last_name, score } = req.body;
     
+    
     // Basic validation
     if (!gender || !first_name || !last_name || typeof score !== 'number') {
         return res.status(400).json({
@@ -29,9 +31,11 @@ exports.createTrainee = async (req, res) => {
     }
     var t = new Trainee(gender,first_name, last_name, score);
     try {
-        // const t = new Trainee(gender, first_name, last_name, score);
-        const q = 'INSERT INTO trainees (gender, first_name, last_name, score) VALUES (?, ?, ?, ?)';
-        db.query(q, [t.gender, t.first_name, t.last_name, t.score], (err, result) => {
+        photo = await saveImage.saveImage(req.body.photo);
+        
+        const t = new Trainee(gender, first_name, last_name, score);
+        const q = 'INSERT INTO trainees (gender, first_name, last_name, score, photo) VALUES (?, ?, ?, ?, ?)';
+        db.query(q, [t.gender, t.first_name, t.last_name, t.score, photo], (err, result) => {
             if (err) {
                 return res.status(500).json({
                     status: 'INTERNAL_SERVER_ERROR',
