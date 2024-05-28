@@ -65,3 +65,20 @@ exports.updateTrainee = async (req, res) => {
         return res.status(200).json({ message: 'Trainee updated successfully' });
     } );
 }
+
+
+exports.deleteTrainee = async (req, res) => {
+    const id  = req.params.id;
+    const q = 'Delete from trainees where id=?';
+    db.query(q, [id] ,
+         (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                status: 'INTERNAL_SERVER_ERROR',
+                message: err.message
+            });
+        }else{
+            return res.status(200).json({ message: 'Trainee deleted successfully' });
+        }
+    } );
+}

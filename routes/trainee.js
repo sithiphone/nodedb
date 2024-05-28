@@ -8,5 +8,6 @@ router.get('/', traineeController.getAllTrainees);
 router.post('/', traineeController.createTrainee);
 //router for update trainee
 router.put('/:id', traineeController.updateTrainee);
-
+//delete trainee
+router.delete('/:id', traineeController.deleteTrainee);
 module.exports = router;
