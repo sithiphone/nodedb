@@ -1,0 +1,7 @@
+var app = require('../app')
+var debug = require('debug')('myapp:server')
+var http = require('http')
+var config = require('../config/index')
+
+var port = normalizePort(config.port || '3000')
+app.set('port', port)
