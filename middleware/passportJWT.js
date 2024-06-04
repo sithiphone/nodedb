@@ -25,20 +25,20 @@ passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
 }));
 
 module.exports.IsLoggedIn = (req, res, next) => {
-    try{
-        passport.authenticate('jwt', {session: false}, (err, user) => {
-            if(err ){
+    try {
+        passport.authenticate('jwt', { session: false }, (err, user) => {
+            if (err) {
                 return next(err);
             }
-            if(!err){
+            if (!user) {
                 err = new Error('Unauthorized');
                 err.statusCode = 401;
                 return next(err);
             }
             req.user = user;
             return next();
-        })(req, res, next);   
-    }catch(err){
+        })(req, res, next);
+    } catch (err) {
         return next(err);
     }
 }
