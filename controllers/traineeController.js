@@ -86,3 +86,21 @@ exports.deleteTrainee = async (req, res) => {
         }
     } );
 }
+
+
+// get trainee by id
+exports.getTraineeById = async (req, res) => {
+    const id  = req.params.id;
+    const q = 'select * from trainees where id=?';
+    db.query(q, [id] ,
+         (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                status: 'INTERNAL_SERVER_ERROR',
+                message: err.message
+            });
+        }else{
+            return res.status(200).json({ data: result });
+        }
+    } );
+}
